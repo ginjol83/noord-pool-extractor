@@ -1,0 +1,24 @@
+{
+  "name": "noord-pool-extractor",
+  "version": "1.0.0",
+  "description": "noord pool extractor info",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agimenez122/noord-pool-extractor.git"
+  },
+  "author": "Ginjol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agimenez122/noord-pool-extractor/issues"
+  },
+  "homepage": "https://github.com/agimenez122/noord-pool-extractor#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "^22.2.0"
+  }
+}
