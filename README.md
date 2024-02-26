@@ -3,7 +3,6 @@
 
 Program designed to extract public data from the Nord Pool energy manager through web scraping, this data contains information about the energy market in some Nordic countries.
 
-
 Area's:
 
     Baltic:
