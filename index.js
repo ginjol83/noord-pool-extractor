@@ -1,9 +1,7 @@
-import { scrape, getCountriesController } from './src/controllers/webscrapperController.js';
+import { scrape, getCountriesController,insertMarketDataController } from './src/controllers/webscrapperController.js';
 import { writeLog } from './src/utils/log-generator.js'
 import ProgressBar from 'progress';
 import colors from 'colors'
-
-//const areas = ['EE','LT','LV','UK','FR','AT','BE','NL','PL']
 
 const areas= getCountriesController()
 
@@ -16,6 +14,7 @@ areas.then(areasList => {
 
     areasList.map(area => {
         scrape(area.CountryCode, formattedNow).then(result => {
+            insertMarketDataController(result)
             result.map(logLine => {
                 writeLog(JSON.stringify(logLine),formattedNow)
             })

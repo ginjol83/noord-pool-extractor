@@ -9,21 +9,14 @@ const getCountriesModel = (conn) => {
 }
 
 
-const insertMarketDataModel = ({ conn, ...params }) => {
-	const uuid = uuidv4()
-	const now = moment.utc().format('YYYY-MM-DD HH:mm:ss')
-
-	/*const requiredFields = params.name && params.type && params.brand && params.model && params.registration_date && params.status
+const insertMarketDataModel = ( conn, params ) => {
 	
-	if(!requiredFields) { 
-		return Promise.resolve()
-	}*/
+	const now = moment.utc().format('YYYY-MM-DD HH:mm:ss')
+	const area = params[0].area
 
-	return mysql
-			.execute(setMarketDataQuery({ ...params, uuid, now }), conn, { ...params, uuid, now })
-			.then(queryResult => queryResult[1].map(({ ...resultFiltered }) => resultFiltered))
-		
+	params.map(data => {
+		if(data.info){ mysql.execute(setMarketDataQuery(data.info), conn, data.info )	}
+	})	
 }
-
 
 export { getCountriesModel, insertMarketDataModel }

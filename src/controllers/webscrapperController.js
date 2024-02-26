@@ -9,7 +9,7 @@ const conn = mysql.start(config)
 
 const getCountriesController = () => getCountriesModel(conn).then(result => result)
 
-const insertMarketController = (params) => insertMarketDataModel(conn, params).then(result => result)
+const insertMarketDataController = (params) => insertMarketDataModel(conn, params)
 
 //Delay function
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
@@ -65,4 +65,4 @@ async function scrape(area,formattedNow) {
     return data;
 }
 
-export { scrape, getCountriesController, insertMarketController }
+export { scrape, getCountriesController, insertMarketDataController }
