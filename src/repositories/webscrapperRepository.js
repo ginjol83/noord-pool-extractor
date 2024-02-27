@@ -1,24 +1,25 @@
 import { v4 as uuidv4 } from 'uuid'
 
-replaceCommaWithDot(inputString) {
+const replaceCommaWithDot = (inputString) => {
     return inputString.replace(/,/g, '.');
-  }
-  
-const getCountriesQuery = () => `SELECT * FROM nord_pool_market_scrapp.countries;`
+}
+
+const removeSpaces = (str) => {
+    return str.replace(/\s/g, '');
+}
+
+const getCountriesQuery = (id) => `SELECT * FROM nord_pool_market_scrapp.countries where AreaID=${id};`
 
 const setMarketDataQuery = (params) => {
-
     const uuid = uuidv4()
-
     const countryID = params.countryID ? params.countryID : 1
-    const mediumPrice = params.MediumPrice ? params.MediumPrice : 0
-    const maxPrice = params.MaxPrice ? params.MaxPrice : 0
-    const minPrice = params.MinPrice ? params.MinPrice : 0
-    const volumMW = params.VolumMW ? params.VolumMW : 0
-    const close = params.Close ? params.Close : 0
-    const open = params.Open ? params.Open : 0
+    const mediumPrice = params.MediumPrice ? removeSpaces(replaceCommaWithDot(params.MediumPrice)) : 0
+    const maxPrice = params.MaxPrice ? removeSpaces(replaceCommaWithDot(params.MaxPrice)) : 0
+    const minPrice = params.MinPrice ? removeSpaces(replaceCommaWithDot(params.MinPrice)) : 0
+    const volumMW = params.VolumMW ? removeSpaces(replaceCommaWithDot(params.VolumMW)) : 0
+    const close = params.Close ? removeSpaces(replaceCommaWithDot(params.Close)) : 0
+    const open = params.Open ? removeSpaces(replaceCommaWithDot(params.Open)) : 0
     const market = params.Market ? params.Market : ''
-    const now = params.now ? params.now : ''
     const period = params.Period ? params.Period : ''
 
     return `INSERT INTO nord_pool_market_scrapp.marketdata (

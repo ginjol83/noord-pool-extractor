@@ -20,4 +20,4 @@ Area's:
         NL = Netherland
         PL = Poland
 
-URL for data => https://data.nordpoolgroup.com/intraday?deliveryDate=2024-02-23&deliveryArea=DK1
+URL for data => https://data.nordpoolgroup.com/intraday?deliveryDate=2024-02-27&deliveryArea=DK1

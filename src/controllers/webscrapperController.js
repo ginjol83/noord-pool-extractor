@@ -7,7 +7,7 @@ import config from '../config/development.js'
 
 const conn = mysql.start(config)
 
-const getCountriesController = () => getCountriesModel(conn).then(result => result)
+const getCountriesController = (id) => getCountriesModel(conn, id).then(result => result)
 
 const insertMarketDataController = (params) => insertMarketDataModel(conn, params)
 
@@ -41,7 +41,7 @@ async function scrape(area,formattedNow) {
     // Load HTML file in cheerie object
     const $ = cheerio.load(bodyHTML);
 
-    const data = [{area: area}];
+    const data = []//[{area: area}];
 
     // TODO Refactor with map function
     $('tr').slice(4).each((i, elem) => {
@@ -57,6 +57,7 @@ async function scrape(area,formattedNow) {
                 Open: row[6],
                 Close: row[7],
                 VolumMW: row[8],
+                area: area
             };
     
             data.push({info:record});
