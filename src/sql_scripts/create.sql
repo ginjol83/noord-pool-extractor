@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS Countries (
     FOREIGN KEY (AreaID) REFERENCES Areas(ID)
 );
 
--- Crear la tabla MarketData si no existe
-CREATE TABLE IF NOT EXISTS MarketData (
+-- Crear la tabla MarketIntraDayData si no existe
+CREATE TABLE IF NOT EXISTS MarketIntraDayData (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     DataUUID CHAR(36) UNIQUE NOT NULL,
     CountryID INT NOT NULL,
@@ -34,6 +34,39 @@ CREATE TABLE IF NOT EXISTS MarketData (
     VolumeMW DECIMAL(10, 2) NOT NULL,
     DateAdded DATE DEFAULT (CURDATE()),
     FOREIGN KEY (CountryID) REFERENCES Countries(ID)
+);
+
+-- Crear la tabla MarketDayAheadPrices si no existe
+CREATE TABLE IF NOT EXISTS MarketDayAheadPrices (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    DataUUID CHAR(36) UNIQUE NOT NULL,
+    CountryID INT NOT NULL,
+    Period VARCHAR(36) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    DateAdded DATE DEFAULT (CURDATE()),
+    FOREIGN KEY (CountryID) REFERENCES Countries(ID)
+);
+
+-- Crear la tabla MarketDayAheadVolumes si no existe
+CREATE TABLE IF NOT EXISTS MarketDayAheadVolumes (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    DataUUID CHAR(36) UNIQUE NOT NULL,
+    CountryID INT NOT NULL,
+    Period VARCHAR(36) NOT NULL,
+    SellVolume DECIMAL(10, 2) NOT NULL,
+    BuyVolume DECIMAL(10, 2) NOT NULL,
+    DateAdded DATE DEFAULT (CURDATE()),
+    FOREIGN KEY (CountryID) REFERENCES Countries(ID)
+);
+
+-- Crear la tabla MarketDayAheadSystemPriceTurnover si no existe
+CREATE TABLE IF NOT EXISTS MarketDayAheadSystemPriceTurnover (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    DataUUID CHAR(36) UNIQUE NOT NULL,
+    Period VARCHAR(36) NOT NULL,
+    SystemPrice DECIMAL(10, 2) NOT NULL,
+    SystemTurnover DECIMAL(10, 2) NOT NULL,
+    DateAdded DATE DEFAULT (CURDATE())
 );
 
 INSERT INTO Areas (ID, AreaUUID, AreaName) VALUES
@@ -64,3 +97,6 @@ INSERT INTO Countries (ID, CountryUUID, CountryCode, CountryName, AreaID) VALUES
 (19, '5fd9b5d9-d553-11ee-986c-842afd10ec8b', 'SE2', 'SE2 Sweden', 4),
 (20, '5fd9b5dd-d553-11ee-986c-842afd10ec8b', 'SE3', 'SE3 Sweden', 4),
 (21, '5fd9b5e2-d553-11ee-986c-842afd10ec8b', 'SE4', 'SE4 Sweden', 4);
+
+
+
